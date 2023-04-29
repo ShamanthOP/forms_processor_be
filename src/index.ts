@@ -24,7 +24,7 @@ const server = new ApolloServer({
 const startServer = async () => {
     await server.start();
     app.use(
-        "/",
+        "/graphql",
         cors<cors.CorsRequest>(),
         express.json(),
         expressMiddleware(server)
@@ -33,12 +33,12 @@ const startServer = async () => {
     await new Promise<void>((resolve) =>
         httpServer.listen({ host: "0.0.0.0", port: port }, resolve)
     );
-    console.log(`🚀 Server ready at http://localhost:${port}`);
+    console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
 };
 
 startServer();
 
-app.get("/submissions", async (req, res) => {
+app.get("/", async (req, res) => {
     const submissions = await db.submission.findMany();
     res.json(submissions);
 });
