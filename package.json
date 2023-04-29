@@ -12,7 +12,8 @@
         "docker:db:migrate": "docker compose run backend pnpm db:migrate",
         "docker:db:migrate:undo": "docker compose run backend pnpx knex migrate:down",
         "docker:seed:dev": "docker compose run backend pnpm ts-node scripts/seed/dev.ts",
-        "rebuild:be": "docker compose build backend && docker compose rm --force --stop backend && docker compose up -d backend"
+        "rebuild:be": "docker compose build backend && docker compose rm --force --stop backend && docker compose up -d backend",
+        "build:prisma": "prisma generate && pnpm rebuild:be"
     },
     "keywords": [],
     "author": "",
