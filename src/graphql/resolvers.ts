@@ -15,7 +15,10 @@ const resolvers = {
     },
 
     Mutation: {
-        queueSubmissionGeneration: async (_, { count }: { count: number }) => {
+        queueSubmissionGeneration: async (
+            _: any,
+            { count }: { count: number }
+        ) => {
             await Promise.all(
                 times(count ?? 1).map(async () => {
                     await enqueue("generateSubmissions");
